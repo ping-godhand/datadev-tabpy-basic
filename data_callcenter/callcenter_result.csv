@@ -1,0 +1,6 @@
+RecordID,CustomerID,AgentName,CustomerName,CustomerIntent,CustomerRequest,OurOffering,Resolution
+Rec-01,Cust-01,Agent-Nina,Somchai Prasert,Report fraud,Check foreign transaction,"Block card, investigate, replace","Card blocked, dispute filed"
+Rec-02,Cust-02,Agent-David,Suda Chaiyasit,waive annual fee,annual fee waiver,fee waiver and cashback,waiver processed and promo activated
+Rec-03,Cust-03,Agent-Amy,Niran Kittipong,Payment assistance inquiry,Installment or payment help,6-month installment plan,Balance converted to plan
+Rec-04,Cust-04,Agent-Sophia,Kanya Rattanakul,Understand card decline,Unlock card,"Unlock card, SMS alerts","Card unlocked, alerts on"
+Rec-05,Cust-05,Agent-James,Pimchanok Leelawat,Travel card use info,Add travel notice,"Travel notice, benefits",Travel notice added
