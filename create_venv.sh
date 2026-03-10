@@ -20,3 +20,4 @@ echo ""
 echo "Virtual environment created and dependencies installed."
 echo "To activate the venv, run:"
 echo "    source .venv/bin/activate"
+source .venv/bin/activate

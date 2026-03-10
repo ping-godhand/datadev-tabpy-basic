@@ -1,6 +1,0 @@
-RecordID,CustomerID,AgentName,CustomerName,CustomerIntent,Resolution
-Rec-01,Cust-01,Agent-Nina,Somchai Prasert,Report fraud transaction,"Card blocked, dispute filed"
-Rec-02,Cust-02,Agent-David,Suda Chaiyasit,Request fee waiver,Annual fee waived
-Rec-03,Cust-03,Agent-Amy,Niran Kittipong,Request payment assistance,6-month installment plan offered
-Rec-04,Cust-04,Agent-Sophia,Kanya Rattanakul,Check card decline reason,"Card unlocked, alerts set"
-Rec-05,Cust-05,Agent-James,Pimchanok Leelawat,Add travel notice,Travel notice added

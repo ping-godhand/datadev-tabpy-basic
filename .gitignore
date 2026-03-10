@@ -7,6 +7,9 @@ __pycache__/
 *.so
 *.log
 tabpy*.*
+.~*
+.DS_Store 
+*.pyc
 
 # Distribution / packaging
 .Python
