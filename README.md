@@ -16,6 +16,10 @@ Activate Virtual Environment ก่อน:
 .venv\Scripts\Activate.ps1
 ```
 
+```bash
+.venv\Scripts\Activate.sh
+```
+
 ใช้คำสั่ง `tabpy-user` สร้าง Password File พร้อมกำหนด User `admin`:
 
 ```powershell
