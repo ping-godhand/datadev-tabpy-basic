@@ -3,7 +3,7 @@ import pandas as pd
 # ──────────────────────────────────────────────
 # Read loan data
 # ──────────────────────────────────────────────
-df = pd.read_csv("data_complex/loan.csv", parse_dates=["SnapshotDate"])
+df = pd.read_csv("data/06-Loan.csv", parse_dates=["SnapshotDate"])
 
 # ──────────────────────────────────────────────
 # DPD Bucket mapping
@@ -44,22 +44,20 @@ df["_prev_rank"] = df.groupby("CustomerID")["_bucket_rank"].shift(1)
 
 def dpd_status(row):
     if pd.isna(row["_prev_rank"]):
-        return "New"          # first snapshot, no prior month
+        return "New"
     elif row["_bucket_rank"] > row["_prev_rank"]:
-        return "Worsen"       # bucket worsened
+        return "Worsen"
     elif row["_bucket_rank"] < row["_prev_rank"]:
-        return "Improve"      # bucket improved
+        return "Improve"
     else:
-        return "NoChange"     # same bucket
+        return "NoChange"
 
 df["DPD_Status"] = df.apply(dpd_status, axis=1)
 
 # ──────────────────────────────────────────────
-# Drop helper columns and save
+# Drop helper columns and print
 # ──────────────────────────────────────────────
 df = df.drop(columns=["_bucket_rank", "_prev_rank"])
 
-df.to_csv("data_complex/load_roll_rate.csv", index=False)
-
 print(df.to_string(index=False))
-print(f"\nSaved -> data_complex/load_roll_rate.csv  ({len(df)} rows)")
+print(f"\n({len(df)} rows)")

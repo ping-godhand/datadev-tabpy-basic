@@ -10,6 +10,7 @@ tabpy*.*
 .~*
 .DS_Store 
 *.pyc
+backup/
 
 # Distribution / packaging
 .Python

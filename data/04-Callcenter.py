@@ -1,18 +1,15 @@
 import os
-import csv
 import json
+import pandas as pd
 from openai import OpenAI
 
 client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
 
-INPUT_FILE = os.path.join(os.path.dirname(__file__), "callcenter.csv")
-OUTPUT_FILE = os.path.join(os.path.dirname(__file__), "callcenter_result.csv")
+INPUT_FILE = "data/04-Callcenter.csv"
 
 SYSTEM_PROMPT = """You analyze call center transcripts. Extract these fields:
 - CustomerName
 - CustomerIntent
-- CustomerRequest
-- OurOffering
 - Resolution
 
 Each value MUST be under 30 characters. Be very concise."""
@@ -27,13 +24,10 @@ RESPONSE_FORMAT = {
             "properties": {
                 "CustomerName":    {"type": "string"},
                 "CustomerIntent":  {"type": "string"},
-                "CustomerRequest": {"type": "string"},
-                "OurOffering":     {"type": "string"},
                 "Resolution":      {"type": "string"},
             },
             "required": [
-                "CustomerName", "CustomerIntent", "CustomerRequest",
-                "OurOffering", "Resolution",
+                "CustomerName", "CustomerIntent", "Resolution",
             ],
             "additionalProperties": False,
         },
@@ -53,36 +47,23 @@ def analyze(text):
     return json.loads(resp.choices[0].message.content)
 
 def main():
-    with open(INPUT_FILE, encoding="utf-8") as f:
-        reader = csv.DictReader(f)
-        rows = list(reader)
+    df = pd.read_csv(INPUT_FILE)
 
     results = []
-    for row in rows:
+    for _, row in df.iterrows():
         print(f"Processing {row['RecordID']}...")
         extracted = analyze(row["TextScript"])
         results.append({
             "RecordID": row["RecordID"],
             "CustomerID": row["CustomerID"],
-            "AgentName": row["AgentName"],
             "CustomerName": extracted["CustomerName"],
             "CustomerIntent": extracted["CustomerIntent"],
-            "CustomerRequest": extracted["CustomerRequest"],
-            "OurOffering": extracted["OurOffering"],
             "Resolution": extracted["Resolution"],
         })
 
-    fieldnames = [
-        "RecordID", "CustomerID", "AgentName",
-        "CustomerName", "CustomerIntent", "CustomerRequest",
-        "OurOffering", "Resolution",
-    ]
-    with open(OUTPUT_FILE, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(results)
-
-    print(f"Saved {len(results)} rows to {OUTPUT_FILE}")
+    result_df = pd.DataFrame(results)
+    print(result_df.to_string(index=False))
+    print(f"\n({len(result_df)} rows)")
 
 if __name__ == "__main__":
     main()

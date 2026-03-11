@@ -19,6 +19,3 @@ df["THB"] = df["THB"].round(2)
 
 print("=== Gold Price: XAUUSD & THB per baht-weight ===")
 print(df.to_string(index=False))
-
-df.to_csv("data_stock/gold.csv", index=False)
-print("\nSaved to data_stock/gold.csv")

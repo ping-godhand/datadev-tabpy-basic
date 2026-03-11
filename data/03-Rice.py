@@ -7,7 +7,7 @@ from sklearn.metrics import r2_score, mean_absolute_error
 # ============================================================
 # 1) Load Data
 # ============================================================
-df = pd.read_csv("03-Rice.csv")
+df = pd.read_csv("data/03-Rice.csv")
 print("=== Raw Data ===")
 print(df)
 print()
